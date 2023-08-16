@@ -1,0 +1,42 @@
+use std::io;
+
+fn main() {
+    println!("Welcome to the Rust Calculator!");
+    let num1 = get_number("Enter the first number: ");
+    let num2 = get_number("Enter the second number: ");
+
+    println!("Sum: {}", add(&num1, &num2));
+    println!("Difference: {}", subtract(&num1, &num2));
+    println!("Product: {}", multiply(&num1, &num2));
+    println!("Quotient: {}", divide(&num1, &num2));
+}
+
+fn get_number(prompt: &str) -> f64 {
+    loop {
+        println!("{}", prompt);
+
+        let mut input = String::new();
+        io::stdin().read_line(&mut input).expect("Failed to read line");
+
+        match input.trim().parse::<f64>() {
+            Ok(num) => return num,
+            Err(_) => println!("Invalid input. Please enter a valid number."),
+        }
+    }
+}
+
+fn add(a: &f64, b: &f64) -> f64 {
+    *a + *b
+}
+
+fn subtract(a: &f64, b: &f64) -> f64 {
+    *a - *b
+}
+
+fn multiply(a: &f64, b: &f64) -> f64 {
+    *a * *b
+}
+
+fn divide(a: &f64, b: &f64) -> f64 {
+    *a / *b
+}
